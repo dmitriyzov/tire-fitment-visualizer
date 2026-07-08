@@ -6,7 +6,7 @@ A small browser-based 3D tire and wheel visualizer. Enter tire and wheel specs, 
 
 - Procedural 3D tire generated from tire/wheel inputs
 - Live sliders and numeric inputs
-- UHP, Touring, and Slick profile presets
+- UHP and Touring profile presets
 - Left-to-right drag rotation
 - Live fitment calculations
 - Mobile-friendly layout

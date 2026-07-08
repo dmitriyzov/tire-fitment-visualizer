@@ -8,7 +8,7 @@ export type TireSpec = {
   preset: TirePresetName;
 };
 
-export type TirePresetName = 'UHP' | 'Touring' | 'Slick';
+export type TirePresetName = 'UHP' | 'Touring';
 
 export type TireCalculations = {
   sidewallMm: number;
@@ -29,7 +29,6 @@ export type TirePreset = {
 export const tirePresets: TirePreset[] = [
   { name: 'UHP', shoulderRoundness: 0.34, sidewallBulge: 0.38 },
   { name: 'Touring', shoulderRoundness: 0.68, sidewallBulge: 0.62 },
-  { name: 'Slick', shoulderRoundness: 0.16, sidewallBulge: 0.12 },
 ];
 
 export const defaultSpec: TireSpec = {

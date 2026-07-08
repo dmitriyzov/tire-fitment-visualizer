@@ -24,7 +24,6 @@ Core UI:
 - Preset tire profiles:
   - UHP: squarer shoulder, moderate bulge
   - Touring: rounded shoulder, more bulge (can be in v2)
-  - Slick: very square shoulder, minimal tread detail (can be in v2)
 - Allow drag left/right to rotate the model
 
 Calculations:
