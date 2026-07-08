@@ -16,6 +16,10 @@ type ProfilePoint = {
 };
 
 const MM_TO_SCENE = 1 / 180;
+const RIM_WIDTH_VISUAL_SCALE = 1.08;
+const BEAD_WIDTH_OVERLAP = 0.035;
+const FACE_RADIUS_OVERLAP = 0.1;
+const BEAD_RADIUS_OVERLAP = 0.035;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -25,21 +29,40 @@ function lerp(start: number, end: number, amount: number) {
   return start + (end - start) * amount;
 }
 
+function createMountDimensions(wheelHalfWidth: number, rimOpeningRadius: number, sidewallHeight: number, overallRadius: number) {
+  // Keep the tire bead slightly outside the visible rim so the wheel never protrudes through it.
+  const wheelFaceHalfWidth = wheelHalfWidth * RIM_WIDTH_VISUAL_SCALE;
+  const tireBeadHalfWidth = wheelFaceHalfWidth + sidewallHeight * BEAD_WIDTH_OVERLAP;
+  const wheelFaceRadius = Math.min(
+    rimOpeningRadius + sidewallHeight * FACE_RADIUS_OVERLAP,
+    overallRadius - sidewallHeight * 0.14,
+  );
+  const tireBeadRadius = Math.min(
+    wheelFaceRadius + sidewallHeight * BEAD_RADIUS_OVERLAP,
+    overallRadius - sidewallHeight * 0.08,
+  );
+
+  return {
+    wheelFaceHalfWidth,
+    wheelFaceRadius,
+    tireBeadHalfWidth,
+    tireBeadRadius,
+  };
+}
+
 export function createTireGeometry(spec: TireSpec): TireGeometrySet {
   const values = calculateTire(spec);
   const tireWidth = spec.widthMm * MM_TO_SCENE;
   const wheelWidth = spec.wheelWidthIn * 25.4 * MM_TO_SCENE;
   const overallRadius = (values.overallDiameterMm / 2) * MM_TO_SCENE;
   const rimOpeningRadius = (values.rimDiameterMm / 2) * MM_TO_SCENE;
-  const wheelFaceRadius = rimOpeningRadius * 1.1;
-  const tireBeadRadius = wheelFaceRadius * 1.025;
   const sidewallHeight = Math.max(0.08, overallRadius - rimOpeningRadius);
 
   const tireHalfWidth = tireWidth / 2;
   const wheelHalfWidth = wheelWidth / 2;
-  const rimVisualHalfWidth = wheelHalfWidth * 1.08;
-  const rimVisualWidth = rimVisualHalfWidth * 2;
-  const tireBeadHalfWidth = rimVisualHalfWidth * 1.025;
+  const { wheelFaceHalfWidth, wheelFaceRadius, tireBeadHalfWidth, tireBeadRadius } =
+    createMountDimensions(wheelHalfWidth, rimOpeningRadius, sidewallHeight, overallRadius);
+  const wheelFaceWidth = wheelFaceHalfWidth * 2;
   const tireBeadWidth = tireBeadHalfWidth * 2;
   const widthDelta = tireHalfWidth - tireBeadHalfWidth;
   const stretch = clamp((tireBeadWidth - tireWidth) / tireWidth, 0, 0.85);
@@ -86,7 +109,7 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
   const wheelGeometry = new THREE.CylinderGeometry(
     wheelFaceRadius,
     wheelFaceRadius,
-    rimVisualWidth,
+    wheelFaceWidth,
     96,
     1,
     false,
