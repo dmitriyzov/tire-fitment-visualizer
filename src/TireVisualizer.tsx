@@ -14,7 +14,7 @@ function WheelAndTire({ spec }: TireVisualizerProps) {
   return (
     <group>
       <mesh geometry={geometry.tireGeometry} castShadow receiveShadow>
-        <meshStandardMaterial color="#2f3235" roughness={0.78} metalness={0.02} />
+        <meshStandardMaterial color="#44484c" roughness={0.74} metalness={0.02} />
       </mesh>
 
       <mesh geometry={geometry.wheelGeometry} castShadow receiveShadow>

@@ -61,9 +61,9 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
   tireGeometry.computeVertexNormals();
 
   const wheelGeometry = new THREE.CylinderGeometry(
-    rimOpeningRadius * 1.01,
-    rimOpeningRadius * 1.01,
-    wheelWidth * 0.92,
+    rimOpeningRadius * 1.05,
+    rimOpeningRadius * 1.05,
+    wheelWidth * 1.08,
     96,
     1,
     false,
