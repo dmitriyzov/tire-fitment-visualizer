@@ -53,6 +53,30 @@ h1 {
   letter-spacing: 0;
 }
 
+.tire-size-form {
+  margin: 0;
+}
+
+.tire-size-input {
+  display: block;
+  width: min(100%, 620px);
+  border: 0;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  color: #161616;
+  font-size: clamp(2rem, 8vw, 4.4rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0;
+  outline: 0;
+}
+
+.tire-size-input:focus {
+  box-shadow: 0 3px 0 #202020;
+}
+
 .size-pill {
   flex: 0 0 auto;
   border: 1px solid #c9c1b5;
@@ -213,6 +237,10 @@ input[type="range"] {
 @media (max-width: 440px) {
   .app-header {
     display: grid;
+  }
+
+  .tire-size-input {
+    width: 100%;
   }
 
   .size-pill {
