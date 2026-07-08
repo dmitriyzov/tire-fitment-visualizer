@@ -8,6 +8,7 @@ export type TireGeometrySet = {
   overallRadius: number;
   tireWidth: number;
   wheelWidth: number;
+  rimVisualWidth: number;
 };
 
 type ProfilePoint = {
@@ -97,5 +98,6 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
     overallRadius,
     tireWidth,
     wheelWidth,
+    rimVisualWidth,
   };
 }
