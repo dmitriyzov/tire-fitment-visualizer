@@ -61,4 +61,4 @@ Build for production:
 npm run build
 ```
 
-See `PLAN.md` for the original project outline.
+See [PLAN.md](https://github.com/dmitriyzov/tire-fitment-visualizer/blob/main/PLAN.md) for the original project outline.
