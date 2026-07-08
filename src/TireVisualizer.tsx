@@ -36,10 +36,13 @@ export default function TireVisualizer({ spec }: TireVisualizerProps) {
         <WheelAndTire spec={spec} />
         <OrbitControls
           enablePan={false}
-          enableZoom={false}
+          enableZoom
+          minDistance={4.2}
+          maxDistance={10}
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
           rotateSpeed={0.7}
+          zoomSpeed={0.8}
         />
       </Canvas>
     </div>
