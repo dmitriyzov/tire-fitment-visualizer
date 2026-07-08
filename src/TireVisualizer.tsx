@@ -41,8 +41,10 @@ export default function TireVisualizer({ spec }: TireVisualizerProps) {
           maxDistance={10}
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2}
+          enableDamping
+          dampingFactor={0.08}
           rotateSpeed={0.7}
-          zoomSpeed={0.8}
+          zoomSpeed={0.45}
         />
       </Canvas>
     </div>
