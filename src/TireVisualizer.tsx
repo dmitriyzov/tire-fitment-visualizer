@@ -28,7 +28,7 @@ export default function TireVisualizer({ spec }: TireVisualizerProps) {
   return (
     <div className="visualizer">
       <Canvas shadows dpr={[1, 2]}>
-        <PerspectiveCamera makeDefault position={[2.8, 0, 7.5]} fov={40} />
+        <PerspectiveCamera makeDefault position={[-3.15, 0, 7.5]} fov={40} />
         <color attach="background" args={['#f6f3ee']} />
         <ambientLight intensity={1.55} />
         <directionalLight position={[2.8, 3.5, 4.5]} intensity={2.1} castShadow />
