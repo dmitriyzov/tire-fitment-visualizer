@@ -31,6 +31,7 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
   const wheelWidth = spec.wheelWidthIn * 25.4 * MM_TO_SCENE;
   const overallRadius = (values.overallDiameterMm / 2) * MM_TO_SCENE;
   const rimOpeningRadius = (values.rimDiameterMm / 2) * MM_TO_SCENE;
+  const rimLipRadius = rimOpeningRadius * 1.06;
   const sidewallHeight = Math.max(0.08, overallRadius - rimOpeningRadius);
 
   const tireHalfWidth = tireWidth / 2;
@@ -47,22 +48,22 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
   const shoulderInset = tireHalfWidth * (0.03 + roundness * 0.11) * (1 - stretch * 0.7);
   const isStretched = rimVisualHalfWidth > tireHalfWidth;
   const leftLowerSidewallX = isStretched
-    ? lerp(-rimVisualHalfWidth, -tireHalfWidth, 0.34)
+    ? lerp(-rimVisualHalfWidth, -tireHalfWidth, 0.28)
     : -tireHalfWidth + shoulderInset * 1.25;
   const leftMidSidewallX = isStretched
-    ? lerp(-rimVisualHalfWidth, -tireHalfWidth, 0.68)
+    ? lerp(-rimVisualHalfWidth, -tireHalfWidth, 0.62)
     : -tireHalfWidth - sidewallBulgeX;
   const rightMidSidewallX = isStretched
-    ? lerp(rimVisualHalfWidth, tireHalfWidth, 0.68)
+    ? lerp(rimVisualHalfWidth, tireHalfWidth, 0.62)
     : tireHalfWidth + sidewallBulgeX;
   const rightLowerSidewallX = isStretched
-    ? lerp(rimVisualHalfWidth, tireHalfWidth, 0.34)
+    ? lerp(rimVisualHalfWidth, tireHalfWidth, 0.28)
     : tireHalfWidth - shoulderInset * 1.25;
 
   // Revolving this 2D x/r profile around the x axis creates the tire body.
   // The duplicated inner-radius points form the rim opening instead of a solid torus.
   const profile: ProfilePoint[] = [
-    { x: -rimVisualHalfWidth, r: rimOpeningRadius },
+    { x: -rimVisualHalfWidth, r: rimLipRadius },
     { x: leftLowerSidewallX, r: rimOpeningRadius + sidewallHeight * 0.2 },
     { x: leftMidSidewallX, r: rimOpeningRadius + sidewallHeight * 0.58 },
     { x: -tireHalfWidth, r: overallRadius - shoulderDrop },
@@ -71,7 +72,7 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
     { x: tireHalfWidth, r: overallRadius - shoulderDrop },
     { x: rightMidSidewallX, r: rimOpeningRadius + sidewallHeight * 0.58 },
     { x: rightLowerSidewallX, r: rimOpeningRadius + sidewallHeight * 0.2 },
-    { x: rimVisualHalfWidth, r: rimOpeningRadius },
+    { x: rimVisualHalfWidth, r: rimLipRadius },
   ];
 
   const points = profile.map((point) => new THREE.Vector2(point.r, point.x));
