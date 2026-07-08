@@ -58,6 +58,12 @@ function formatPercent(value: number) {
   return `${Math.round(value * 100)}%`;
 }
 
+function formatSignedPercent(value: number) {
+  const rounded = Math.round(value * 100);
+
+  return rounded > 0 ? `+${rounded}%` : `${rounded}%`;
+}
+
 export default function ControlsPanel({ spec, onChange }: ControlsPanelProps) {
   const calculations = calculateTire(spec);
 
@@ -85,7 +91,7 @@ export default function ControlsPanel({ spec, onChange }: ControlsPanelProps) {
           label="Tire width"
           min={155}
           max={405}
-          step={5}
+          step={10}
           value={spec.widthMm}
           unit="mm"
           onChange={(widthMm) => setSpec({ widthMm })}
@@ -143,6 +149,10 @@ export default function ControlsPanel({ spec, onChange }: ControlsPanelProps) {
         <div>
           <dt>Overall diameter</dt>
           <dd>{formatMm(calculations.overallDiameterMm)}</dd>
+        </div>
+        <div>
+          <dt>Overall diameter Δ</dt>
+          <dd>{formatSignedPercent(calculations.overallDiameterDelta)}</dd>
         </div>
         <div>
           <dt>Meat index</dt>

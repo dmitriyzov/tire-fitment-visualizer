@@ -13,12 +13,13 @@ A small browser-based 3D tire and wheel visualizer. Enter tire and wheel specs, 
 
 ## 🧮 Calculations
 
-Given a tire size like `245/55R18`:
+Given a tire size like `225/60r17`:
 
 ```txt
 sidewall_mm = width_mm * aspect_ratio / 100
 rim_diameter_mm = rim_diameter_in * 25.4
 overall_diameter_mm = rim_diameter_mm + 2 * sidewall_mm
+overall_diameter_delta = (overall_diameter_mm - default_overall_diameter_mm) / default_overall_diameter_mm
 meat_index = (2 * sidewall_mm) / overall_diameter_mm
 width_to_height = width_mm / overall_diameter_mm
 tire_to_wheel_width_ratio = width_mm / wheel_width_in
@@ -28,6 +29,7 @@ The UI displays:
 
 - Sidewall height
 - Overall diameter
+- Overall diameter delta from the default `225/60r17`
 - Meat index
 - Width / overall diameter
 - Tire width / wheel width

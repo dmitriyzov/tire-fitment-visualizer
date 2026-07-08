@@ -14,11 +14,11 @@ function WheelAndTire({ spec }: TireVisualizerProps) {
   return (
     <group>
       <mesh geometry={geometry.tireGeometry} castShadow receiveShadow>
-        <meshStandardMaterial color="#121315" roughness={0.82} metalness={0.04} />
+        <meshStandardMaterial color="#2f3235" roughness={0.78} metalness={0.02} />
       </mesh>
 
       <mesh geometry={geometry.wheelGeometry} castShadow receiveShadow>
-        <meshStandardMaterial color="#777b82" roughness={0.38} metalness={0.82} />
+        <meshStandardMaterial color="#c2c5c9" roughness={0.28} metalness={0.74} />
       </mesh>
     </group>
   );
@@ -30,9 +30,9 @@ export default function TireVisualizer({ spec }: TireVisualizerProps) {
       <Canvas shadows dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[2.8, 0, 7.5]} fov={40} />
         <color attach="background" args={['#f6f3ee']} />
-        <ambientLight intensity={1.2} />
-        <directionalLight position={[2.8, 3.5, 4.5]} intensity={2.2} castShadow />
-        <directionalLight position={[-3, -1, 2]} intensity={0.75} />
+        <ambientLight intensity={1.55} />
+        <directionalLight position={[2.8, 3.5, 4.5]} intensity={2.1} castShadow />
+        <directionalLight position={[-3, -1, 2]} intensity={1.05} />
         <WheelAndTire spec={spec} />
         <OrbitControls
           enablePan={false}

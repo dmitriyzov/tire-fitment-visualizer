@@ -14,6 +14,7 @@ export type TireCalculations = {
   sidewallMm: number;
   rimDiameterMm: number;
   overallDiameterMm: number;
+  overallDiameterDelta: number;
   meatIndex: number;
   widthToHeight: number;
   tireToWheelWidthRatio: number;
@@ -32,24 +33,33 @@ export const tirePresets: TirePreset[] = [
 ];
 
 export const defaultSpec: TireSpec = {
-  widthMm: 245,
-  aspectRatio: 55,
-  rimDiameterIn: 18,
-  wheelWidthIn: 8.5,
+  widthMm: 225,
+  aspectRatio: 60,
+  rimDiameterIn: 17,
+  wheelWidthIn: 7.5,
   shoulderRoundness: tirePresets[0].shoulderRoundness,
   sidewallBulge: tirePresets[0].sidewallBulge,
   preset: 'UHP',
 };
 
+function calculateOverallDiameterMm(spec: TireSpec) {
+  const sidewallMm = (spec.widthMm * spec.aspectRatio) / 100;
+  const rimDiameterMm = spec.rimDiameterIn * 25.4;
+
+  return rimDiameterMm + 2 * sidewallMm;
+}
+
 export function calculateTire(spec: TireSpec): TireCalculations {
   const sidewallMm = (spec.widthMm * spec.aspectRatio) / 100;
   const rimDiameterMm = spec.rimDiameterIn * 25.4;
   const overallDiameterMm = rimDiameterMm + 2 * sidewallMm;
+  const defaultOverallDiameterMm = calculateOverallDiameterMm(defaultSpec);
 
   return {
     sidewallMm,
     rimDiameterMm,
     overallDiameterMm,
+    overallDiameterDelta: (overallDiameterMm - defaultOverallDiameterMm) / defaultOverallDiameterMm,
     // Meat index is how much of the tire diameter is sidewall instead of rim.
     meatIndex: (2 * sidewallMm) / overallDiameterMm,
     widthToHeight: spec.widthMm / overallDiameterMm,

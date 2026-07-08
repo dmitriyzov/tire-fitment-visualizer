@@ -12,7 +12,7 @@ export default function App() {
         <div>
           <p className="eyebrow">Meaty Tires</p>
           <h1>
-            {spec.widthMm}/{spec.aspectRatio}R{spec.rimDiameterIn}
+            {spec.widthMm}/{spec.aspectRatio}r{spec.rimDiameterIn}
           </h1>
         </div>
         <div className="size-pill">{spec.wheelWidthIn}" wheel</div>

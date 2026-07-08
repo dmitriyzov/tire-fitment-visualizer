@@ -35,7 +35,8 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
   const stretch = clamp((wheelWidth - tireWidth) / tireWidth, 0, 0.35);
   const bulge = clamp(spec.sidewallBulge, 0, 1);
   const roundness = clamp(spec.shoulderRoundness, 0, 1);
-  const sidewallBulgeX = widthDelta * (0.25 + bulge * 0.55) - stretch * tireWidth * 0.11;
+  const sidewallBulgeX =
+    widthDelta * 0.35 + sidewallHeight * bulge * 0.18 - stretch * tireWidth * 0.11;
   const shoulderDrop = sidewallHeight * (0.03 + roundness * 0.14);
   const shoulderInset = tireHalfWidth * (0.03 + roundness * 0.11);
 
@@ -60,8 +61,8 @@ export function createTireGeometry(spec: TireSpec): TireGeometrySet {
   tireGeometry.computeVertexNormals();
 
   const wheelGeometry = new THREE.CylinderGeometry(
-    rimOpeningRadius * 0.94,
-    rimOpeningRadius * 0.94,
+    rimOpeningRadius * 1.01,
+    rimOpeningRadius * 1.01,
     wheelWidth * 0.92,
     96,
     1,
